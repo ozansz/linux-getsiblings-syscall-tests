@@ -24,6 +24,7 @@
 #define getsiblings(p, b, c) syscall(NR_GETSIBLINGS, p, b, c)
 
 #define N_CHILDREN  20
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
 int main(int argc, char *argv[]) {
     int i, j, ret;
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
                     return 0;
                 }
 
-                for (j = 0; j < ret; j++)
+                for (j = 0; j < MIN(ret, N_CHILDREN); j++)
                     printf("sibling[%d] = %d\n", j, infobuf[j]);
             }
 
